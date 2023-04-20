@@ -30,7 +30,7 @@ router.get('/test-me3', function(req, res) {
         /*- Create an array of strings containing the names all the months of a year and split 
         the array into 4 equally sized sub-arrays using the chunk function.
          Print these sub-arrays on console.*/
-    console.log(myLodash.chunk(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sept", "oct", "nov", "dec"], 4))
+    console.log(myLodash.chunk(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sept", "oct", "nov", "dec"], 3))
 
     /*- Create an array containing the first 10 odd numbers. 
     Using the tail function, return the last 9 elements of it and print them on console. */
