@@ -4,6 +4,6 @@ Nodejs Introduction Session
 
 ## Assignment 
 
-https://docs.google.com/document/d/1fsz27ekIG7l_FBSL1mIw-1vXTDNJun3HNrP-EG4oR94/edit
+Video Solution for this assignment : https://drive.google.com/file/d/1ej6Dsn2xrQUFK1WPOGxyIzi4z_WLu4EI/view?usp=share_link
 
 
