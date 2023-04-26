@@ -43,6 +43,8 @@ router.put('/update-profile', function(req, res) {
 router.delete('/deactivate-account', function(req, res) {
     res.send('profile deleted')
 });*/
+
+//problem 1:
 const movies = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
 router.get('/movies', function(req, res) {
     //console.log(req.params.studentName)
@@ -133,6 +135,19 @@ router.get('/films/:filmId', function(req, res) {
         res.send(film)
     else
         res.send("No movie exists with this id")
+})
+
+//missing number
+let arr = [4, 5, 6, 8, 9]
+router.get('/missingNumber', function(req, res) {
+    let result
+    for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i + 1] - arr[i] != 1)
+            result = arr[i] + 1
+
+    }
+    console.log(result)
+    return res.send("done")
 })
 
 
