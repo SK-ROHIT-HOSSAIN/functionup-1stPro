@@ -1,43 +1,43 @@
 const express = require('express');
 const router = express.Router();
 
-let persons = [{
-        name: "PK",
-        age: 10,
-        votingStatus: false
+
+let players = [{
+        "name": "manish",
+        "dob": "1/1/1995",
+        "gender": "male",
+        "city": "jalandhar",
+        "sports": [
+            "swimming"
+        ]
     },
     {
-        name: "SK",
-        age: 20,
-        votingStatus: false
+        "name": "gopal",
+        "dob": "1/09/1995",
+        "gender": "male",
+        "city": "delhi",
+        "sports": [
+            "soccer"
+        ],
     },
     {
-        name: "AA",
-        age: 70,
-        votingStatus: false
+        "name": "lokesh",
+        "dob": "1/1/1990",
+        "gender": "male",
+        "city": "mumbai",
+        "sports": [
+            "soccer"
+        ],
     },
-    {
-        name: "SC",
-        age: 5,
-        votingStatus: false
-    },
-    {
-        name: "HO",
-        age: 40,
-        votingStatus: false
-    }
 ]
 
 
-router.post('/person', (req, res) => {
-    let q = req.query.votingAge;
-    let arr = [];
-    persons.forEach(x => {
-        if (x.age >= q) {
-            x.votingStatus = true;
-            arr.push(x);
-        }
-    })
-    res.send(arr);
+router.post('/players', function(req, res) {
+    let value = players.find(x => x.name == req.body.name);
+    if (!value) {
+        players.push(req.body);
+    }
+    res.send({ data: players, status: true })
 })
+
 module.exports = router;
