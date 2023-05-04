@@ -22,6 +22,7 @@ const createPublisher = async function(req, res) {
 
 const findAuthor = async(req, res) => {
     let data = req.body;
+    console.log(data);
     let obj = await authorModel.findOne(data);
     if (obj) {
         res.json({ data: obj })
