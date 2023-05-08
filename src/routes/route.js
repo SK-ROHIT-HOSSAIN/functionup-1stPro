@@ -1,18 +1,25 @@
-const express = require('express');
+const express = require("express")
 const router = express.Router();
-const userController= require("../controllers/userController")
+const controller = require('../controllers/controller')
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+//this is middlewarefunction
+const checkexist = function(req, res, next) {
+    //it will check isfreeappuser key in available in headers or not
+    // if isfreeappuser available in headers and value is set to false then it 
+    //will return error
+    if ((!req.headers.hasOwnProperty('isfreeappuser')) || (req.headers.hasOwnProperty('isfreeappuser')) && (req.headers.isfreeappuser == "false")) {
+        return res.send('missing item')
 
-router.post("/users", userController.createUser  )
+    }
+    //if all set then it will goes into route handler
+    next();
+}
 
-router.post("/login", userController.loginUser)
 
-//The userId is sent by front end
-router.get("/users/:userId", userController.getUserData)
 
-router.put("/users/:userId", userController.updateUser)
+router.post('/usercreate', checkexist, controller.usercreate) //call middleware functionn
+router.post('/productcreate', controller.productcreate)
+router.post('/ordercreate', controller.ordercreate)
+router.post('/purchase', controller.purchase)
 
 module.exports = router;
