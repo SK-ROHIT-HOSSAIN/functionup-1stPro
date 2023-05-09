@@ -7,7 +7,7 @@ const checkexist = function(req, res, next) {
     //it will check isfreeappuser key in available in headers or not
     // if isfreeappuser available in headers and value is set to false then it 
     //will return error
-    if ((!req.headers.hasOwnProperty('isfreeappuser')) || (req.headers.hasOwnProperty('isfreeappuser')) && (req.headers.isfreeappuser == "false")) {
+    if ((!req.headers.hasOwnProperty('isfreeappuser'))) {
         return res.send('missing item')
 
     }
@@ -19,7 +19,7 @@ const checkexist = function(req, res, next) {
 
 router.post('/usercreate', checkexist, controller.usercreate) //call middleware functionn
 router.post('/productcreate', controller.productcreate)
-router.post('/ordercreate', controller.ordercreate)
-router.post('/purchase', controller.purchase)
+router.post('/ordercreate', checkexist, controller.ordercreate)
+router.put('/purchase', controller.purchase)
 
 module.exports = router;
