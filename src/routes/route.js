@@ -9,9 +9,9 @@ router.get("/test-me", function(req, res) {
 
 router.post("/users", userController.createUser)
 router.post("/login", userController.loginUser)
-router.get("/users/:userId", mid.headerCheck, mid.userCheck, userController.getUserData)
-router.put("/users/:userId", mid.headerCheck, mid.userCheck, userController.updateUser)
-router.delete("/users/:userId", mid.headerCheck, mid.userCheck, userController.deleteUser)
+router.get("/users/:userId", mid.headerCheck, mid.userCheck, mid.checkAuth, userController.getUserData)
+router.put("/users/:userId", mid.headerCheck, mid.userCheck, mid.checkAuth, userController.updateUser)
+router.delete("/users/:userId", mid.headerCheck, mid.userCheck, mid.checkAuth, userController.deleteUser)
 
 
 module.exports = router;

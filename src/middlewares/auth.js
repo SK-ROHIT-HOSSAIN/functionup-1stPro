@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel')
+const jwt = require("jsonwebtoken");
 let headerCheck = (req, res, next) => {
     let token = req.headers["x-auth-token"];
     if (!token) {
@@ -15,4 +16,16 @@ let userCheck = async(req, res, next) => {
     next();
 }
 
-module.exports = { headerCheck, userCheck }
+let checkAuth = async(req, res, next) => {
+    let token = req.headers["x-auth-token"];
+
+    let decodedToken = jwt.verify(token, "MySecretMsg");
+    if (!decodedToken) {
+        return res.send({ status: false, msg: "token is invalid" });
+    }
+    req.decodedToken = decodedToken;
+    next();
+
+}
+
+module.exports = { headerCheck, userCheck, checkAuth }

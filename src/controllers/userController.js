@@ -27,29 +27,37 @@ const loginUser = async function(req, res) {
 };
 
 const getUserData = async function(req, res) {
-    let token = req.headers["x-auth-token"];
+    let decodedToken = req.decodedToken;
 
-    let decodedToken = jwt.verify(token, "MySecretMsg");
-    if (!decodedToken) {
-        return res.send({ status: false, msg: "token is invalid" });
-    }
-    let userId = req.params.userId;
-    let userDetails = await userModel.findById(userId);
-    res.send({ status: true, token: decodedToken, data: userDetails });
+    if (decodedToken._id === req.params.userId) {
+        let userId = req.params.userId;
+        let userDetails = await userModel.findById(userId);
+        res.send({ status: true, token: decodedToken, data: userDetails });
+    } else
+        res.send({ msg: "User is not authorised." })
 
 };
 
 const updateUser = async function(req, res) {
-    let userId = req.params.userId;
-    let userData = req.body;
-    let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData, { new: true });
-    res.send({ status: "Updated User", data: updatedUser });
+    let decodedToken = req.decodedToken;
+    if (decodedToken._id === req.params.userId) {
+        let userId = req.params.userId;
+        let userData = req.body;
+        let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData, { new: true });
+        res.send({ status: "Updated User", data: updatedUser });
+    } else
+        res.send({ msg: "User is not authorised." })
 }
 
 let deleteUser = async(req, res) => {
-    let userId = req.params.userId;
-    let deletedUser = await userModel.findOneAndUpdate({ _id: userId }, { isDeleted: true }, { new: true });
-    res.send({ status: " Deleted User", data: deletedUser });
+    let decodedToken = req.decodedToken;
+    if (decodedToken._id === req.params.userId) {
+        let userId = req.params.userId;
+        let deletedUser = await userModel.findOneAndUpdate({ _id: userId }, { isDeleted: true }, { new: true });
+        res.send({ status: " Deleted User", data: deletedUser });
+    } else
+        res.send({ msg: "User is not authorised." })
+
 }
 
 
